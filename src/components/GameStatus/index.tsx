@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled, { css } from 'styled-components'
 import { Attack, GameState } from '../../store/types'
@@ -25,7 +25,10 @@ const EndText = styled.div`
 
 const GameText = styled.div`
     font-size: 2rem;
+    transform: scale(0, 0);
+    transition: transform 0.2s ease-out;
     ${centerText};
+    ${(p: { refresh?: boolean }) => p.refresh && css`transform: scale(1, 1);`};
 `
 
 interface GameStatusProps {
@@ -47,14 +50,21 @@ const currentHit = ({ target, damage }: Attack) => {
 }
 
 const GameStatus: React.FC<GameStatusProps> = ({
-    game: { ended: end, loser },
+    game: { ended, loser },
     attack
 }) => {
+    const [newText, setNewText] = useState(false)
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        setNewText(true)
+        setTimeout(() => setNewText(false), 1000)
+    }, [attack, ended])
+
     return (
         <GameStatusContainer>
-            {!end ? (
-               <GameText>{currentHit(attack)}</GameText> 
+            {!ended ? (
+               <GameText refresh={newText}>{currentHit(attack)}</GameText> 
             ) : (
                 <>
                     {
