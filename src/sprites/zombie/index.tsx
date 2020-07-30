@@ -46,6 +46,7 @@ const ZombieSprite: React.FC<SpriteProps> = ({ animation }) => {
             default:
                 setZombieState(idleSprite)
         }
+    // eslint-disable-next-line
     }, [animation])
 
     return (

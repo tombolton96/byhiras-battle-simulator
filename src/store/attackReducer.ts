@@ -1,4 +1,4 @@
-import { ROLL_DICE, CALC_DAMAGE, TAKE_DAMAGE, RESET_GAME, AttackReducer, CHAR_ANIMATION } from './types'
+import { ROLL_DICE, CALC_DAMAGE, TAKE_DAMAGE, RESET_GAME, AttackReducer } from './types'
 import initialState from './initialState'
 
 export const attackReducer: AttackReducer = (state = initialState, action) => {
@@ -59,14 +59,6 @@ export const attackReducer: AttackReducer = (state = initialState, action) => {
               }
             }
           }
-        // case CHAR_ANIMATION:
-        //   return state.game.ended ? state : {
-        //     ...state,
-        //     [action.payload.character]: {
-        //       ...state[action.payload.characer],
-        //       animation: action.payload.animation
-        //     }
-        //   }
         // eslint-disable-next-line
         case RESET_GAME:
           return initialState

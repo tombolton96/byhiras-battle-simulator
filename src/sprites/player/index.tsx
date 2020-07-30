@@ -46,6 +46,7 @@ const PlayerSprite: React.FC<SpriteProps> = ({ animation }) => {
             default:
                 setPlayerState(idleSprite)
         }
+    // eslint-disable-next-line
     }, [animation])
 
     return (
